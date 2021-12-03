@@ -84,6 +84,7 @@ public class AddActivity extends AppCompatActivity {
                 values.put("payment", Payment);
                 values.put("day", NumDay);
                 values.put("month", Month);
+                db.insert("expenditure", null, values);
 
                 //ページを閉じる
                 finish();

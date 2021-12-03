@@ -45,14 +45,17 @@ public class TestOpenHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {   //テーブル作成
+    public void onCreate(SQLiteDatabase db) {
+        //テーブル作成
+        // SQLiteファイルがなければSQLiteファイルが作成される
         db.execSQL(
                 SQL_CREATE_ENTRIES
         );
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {  //テーブル削除
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //アップデートの判別、古いバージョンは削除して新規作成
         db.execSQL(
                 SQL_DELETE_ENTRIES
         );
@@ -77,4 +80,5 @@ public class TestOpenHelper extends SQLiteOpenHelper {
 
         db.insert("expenditure", null, values);
     }
+
 }
