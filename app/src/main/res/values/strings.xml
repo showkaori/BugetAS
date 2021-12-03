@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">BudgetAS</string>
+    <string name="addTitle">出費の追加</string>
+    <string name="month">表示したい月</string>
+    <string name="addButton">追加</string>
+    <string name="t1">日　　付　　：　</string>
+    <string name="day">2021/12/1</string>
+    <string name="t2">カテゴリー　：　</string>
+    <string name="category">選択してください</string>
+    <string name="t3">タイトル　　：　</string>
+    <string name="detail">入力必須</string>
+    <string name="t4">メ　　モ　　：　</string>
+    <string name="memo">店名や詳細など</string>
+    <string name="t5">金　　額　　：　</string>
+    <string name="money">入力必須</string>
+    <string name="t6">支払方法　　：　</string>
+    <string name="payment">選択してください</string>
+    <string name="hiduke"> </string>
+    <string name="goukei"> </string>
+
+    <string-array name="categorySpinner">
+        <item>食費</item>
+        <item>外食</item>
+        <item>日用品</item>
+        <item>嗜好品</item>
+        <item>服・美容</item>
+        <item>交通費</item>
+        <item>教養</item>
+        <item>家族</item>
+        <item>医療</item>
+        <item>通信費</item>
+        <item>光熱費</item>
+        <item>住まい</item>
+        <item>税金</item>
+        <item>保険</item>
+        <item>その他</item>
+    </string-array>
+
+    <string-array name="paymentSpinner">
+        <item>現金</item>
+        <item>口座引落</item>
+        <item>クレジットカード</item>
+        <item>pay</item>
+        <item>その他</item>
+    </string-array>
+
+</resources>
