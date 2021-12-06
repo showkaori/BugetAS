@@ -7,9 +7,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private CalendarView calendarView;
     private TestOpenHelper helper;
     private SQLiteDatabase db;
+    ArrayList<Expenditure> dataList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     d = String.valueOf(mDay);
                 }
+                //ListViewのリセット
+                dataList.clear ();
                 //カレンダーで選択している日付の取得
                 String selectedDate = new StringBuilder().append(mYear).append(mon).append(d).toString(); //yyyyMMddの形に
                 System.out.println(selectedDate);
@@ -70,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 d1.setText(String.valueOf(mDay) + "日"); //クリックしている日にちの表示
 
                 //その日にデータがある場合はリストビューに表示
-                List<Expenditure> dataList = new ArrayList<>();
                 if(helper == null){
                     helper = new TestOpenHelper(getApplicationContext());
                 }
@@ -105,7 +110,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                     cursor.close();
 
-                    //結果をListViewに表示させるところから
+                    //結果をListViewに表示させる
+                    ListView listView = (ListView)findViewById(R.id.mainList); //LIstViewインスタンス化
+                    MyAdapter myAdapter = new MyAdapter(MainActivity.this);//自作のアダプター
+
+                    myAdapter.setDataList(dataList);    //表示したいリストをセット
+                    listView.setAdapter(myAdapter);     //リストビューに表示
                 }
 
 
