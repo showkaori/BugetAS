@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,14 +67,16 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     d = String.valueOf(mDay);
                 }
-                //ListViewのリセット
-                dataList.clear ();
+
                 //カレンダーで選択している日付の取得
                 String selectedDate = new StringBuilder().append(mYear).append(mon).append(d).toString(); //yyyyMMddの形に
                 System.out.println(selectedDate);
 
                 TextView d1 = findViewById(R.id.d1);
                 d1.setText(String.valueOf(mDay) + "日"); //クリックしている日にちの表示
+
+                //他の日のデータに追加ではなくその日のデータのみ表示したいのでいったんクリア
+                dataList.clear ();
 
                 //その日にデータがある場合はリストビューに表示
                 if(helper == null){
@@ -94,8 +97,13 @@ public class MainActivity extends AppCompatActivity {
                 );
                 cursor.moveToFirst();
 
+                ListView listView = (ListView)findViewById(R.id.mainList); //LIstViewインスタンス化
+                TextView s1 = (TextView) findViewById(R.id.s1);
+                int sum = 0;
+                NumberFormat nfCur = NumberFormat.getCurrencyInstance();  //通貨形式
                 if(cursor.getCount() != 0 ){
                     for(int i = 0; i < cursor.getCount(); i++){
+                        //出費データのオブジェクト作成
                         int id = cursor.getInt(0);
                         String detail = cursor.getString(1);
                         String memo = cursor.getString(2);
@@ -106,19 +114,30 @@ public class MainActivity extends AppCompatActivity {
                         String month1 = cursor.getString(7);
                         Expenditure exp = new Expenditure(id, detail, memo, category, money, payment, day,month1);
                         dataList.add(exp);
+
+                        //出費合計
+                        sum += money;
+                        s1.setText(nfCur.format(sum));
                         cursor.moveToNext();
                     }
                     cursor.close();
 
-                    //結果をListViewに表示させる
-                    ListView listView = (ListView)findViewById(R.id.mainList); //LIstViewインスタンス化
+                    //新たにクリックした日の結果をListViewに表示させる
                     MyAdapter myAdapter = new MyAdapter(MainActivity.this);//自作のアダプター
-
                     myAdapter.setDataList(dataList);    //表示したいリストをセット
                     listView.setAdapter(myAdapter);     //リストビューに表示
+
+                    //合計金額をid=s1に表示させる
+                }else{
+                    //その日にデータがないとき
+                    //ListViewのリセット(ひとつ前の動作で表示されているListViewの削除）
+                    MyAdapter myAdapter = new MyAdapter(MainActivity.this);//自作のアダプター
+                    dataList.clear ();
+                    myAdapter.setDataList(dataList);    //表示したいリストをセット
+                    listView.setAdapter(myAdapter);     //リストビューに表示
+
+                    s1.setText(R.string.s1);//合計金額に0円表示
                 }
-
-
             }
 
         });

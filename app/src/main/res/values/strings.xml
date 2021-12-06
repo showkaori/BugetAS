@@ -15,8 +15,8 @@
     <string name="money">入力必須</string>
     <string name="t6">支払方法　　：　</string>
     <string name="payment">選択してください</string>
-    <string name="d1">日付</string>
-    <string name="s1">合計金額</string>
+    <string name="d1"> </string>
+    <string name="s1">　</string>
     <string name="data1">データカテゴリー</string>
     <string name="cancel">キャンセル</string>
     <string name="reg">登録</string>

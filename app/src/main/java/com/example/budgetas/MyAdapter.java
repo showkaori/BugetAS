@@ -40,10 +40,11 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = layoutInflater.inflate(R.layout.row_main,parent,false);
+        convertView = layoutInflater.inflate(R.layout.row_main,parent,false);//使用したいLIstViewのレイアウトセット
 
+        //レイアウト（R.layout.row_main）の表示したいIdの箇所に何を当てはめるか
         ((TextView)convertView.findViewById(R.id.category)).setText(dataList.get(position).getCategory());
-        ((TextView)convertView.findViewById(R.id.money)).setText(String.valueOf(dataList.get(position).getMoney()));
+        ((TextView)convertView.findViewById(R.id.money)).setText(dataList.get(position).getStrMoney());
         ((TextView)convertView.findViewById(R.id.detail)).setText(dataList.get(position).getDetail());
 
         return convertView;
