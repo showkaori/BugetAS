@@ -8,18 +8,26 @@
     <string name="t2">カテゴリー　：　</string>
     <string name="category">選択してください</string>
     <string name="t3">タイトル　　：　</string>
-    <string name="detail">入力必須</string>
+    <string name="detail">20文字以内</string>
     <string name="t4">メ　　モ　　：　</string>
-    <string name="memo">店名や詳細など</string>
+    <string name="memo">200文字以内</string>
     <string name="t5">金　　額　　：　</string>
     <string name="money">入力必須</string>
     <string name="t6">支払方法　　：　</string>
+    <string name="t7">管理番号　　：　</string>
+    <string name="t8">　</string>
     <string name="payment">選択してください</string>
     <string name="d1"> </string>
     <string name="s1">　</string>
     <string name="data1">データカテゴリー</string>
     <string name="cancel">キャンセル</string>
     <string name="reg">登録</string>
+    <string name="editTitle">変更・削除</string>
+    <string name="deleteButton">削除</string>
+    <string name="editButton">変更</string>
+    <string name="dialog_title">データの削除</string>
+    <string name="dialog_button_ok">削除</string>
+    <string name="dialog_button_cancel">キャンセル</string>
 
     <string-array name="categorySpinner">
         <item>食費</item>

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -20,11 +22,21 @@ import java.util.Locale;
 
 public class AddActivity extends AppCompatActivity {
     private TestOpenHelper helper;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        System.out.println("AddPage onCreate");
+
+        //日付データを持って移動してきたとき
+        Intent intent = getIntent();
+        String selectDay = intent.getStringExtra("day");
+        if(selectDay != null){
+            EditText day = (EditText) findViewById(R.id.day);
+            day.setText(selectDay);
+        }
 
         //データベースヘルパーのインスタンスを作成する（まだデータベースはできない）
         helper = new TestOpenHelper(this);
@@ -32,6 +44,7 @@ public class AddActivity extends AppCompatActivity {
         Spinner spinnerCategory = findViewById(R.id.category);
         Spinner spinnerPayment = findViewById(R.id.payment);
         Button executeButton = (Button) findViewById(R.id.executeButton);
+        Button cancelButton = (Button) findViewById(R.id.cancel);
         EditText day = (EditText) findViewById(R.id.day);
         EditText detail = (EditText) findViewById(R.id.detail);
         EditText memo = (EditText) findViewById(R.id.memo);
@@ -48,7 +61,7 @@ public class AddActivity extends AppCompatActivity {
         // spinner に adapter をセット
         spinnerCategory.setAdapter(adapter1);
 
-        // Alayout/custom_spinnerからデザイン取得、value/stringからpaymentSpinner取得
+        // layout/custom_spinnerからデザイン取得、value/stringからpaymentSpinner取得
         ArrayAdapter<String> adapter2
                 = new ArrayAdapter<>(this,
                 R.layout.custom_spinner,
@@ -58,6 +71,8 @@ public class AddActivity extends AppCompatActivity {
 
         // spinner に adapter をセット
         spinnerPayment.setAdapter(adapter2);
+
+
 
         //追加ボタンクリック時
         executeButton.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +101,15 @@ public class AddActivity extends AppCompatActivity {
                 values.put("month", Month);
                 db.insert("expenditure", null, values);
 
+                //ページを閉じる
+                finish();
+            }
+        });
+
+        //キャンセルボタンクリック時
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 //ページを閉じる
                 finish();
             }

@@ -7,48 +7,72 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import java.sql.Timestamp;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private CalendarView calendarView;
     private TestOpenHelper helper;
     private SQLiteDatabase db;
     ArrayList<Expenditure> dataList = new ArrayList<>();
+    private String day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        System.out.println("MainPage onCreate");
 
         initCalendar();
-
         Button addButton = findViewById(R.id.addButton);
-        //追加ボタン押下時
+        //追加ボタンクリック時
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //今日の日付の取得
+                //デフォルトのタイムゾーンおよびロケールを使用してカレンダを取得
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                String mon;
+                    if((month+1) < 10){
+                        mon = "0" + (month+1);
+                    }else{
+                        mon = String.valueOf(month+1);
+                    }
+                int today = c.get(Calendar.DAY_OF_MONTH);
+                    String d;
+                if ((today) < 10) {    //一桁の場合０を付ける
+                    d = "0" + (today);
+                } else {
+                    d = String.valueOf(today);
+                }
+                day = new StringBuilder().append(year).append("/").append(mon).append("/").append(d).toString();
+                System.out.println(day);
                 //追加ページに画面遷移
-                Intent intent = new Intent(getApplication(), AddActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                System.out.println("追加したい日" + day);
+                intent.putExtra("day", day);
                 startActivity(intent);
             }
         });
+
     }
+
 
     //日付選択時のイベント
     private void initCalendar(){
         calendarView = (CalendarView)findViewById(R.id.calendarView);
-
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
@@ -70,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //カレンダーで選択している日付の取得
                 String selectedDate = new StringBuilder().append(mYear).append(mon).append(d).toString(); //yyyyMMddの形に
+                String selectedDay = new StringBuilder().append(mYear).append("/").append(mon).append("/").append(d).toString(); //画面遷移時に使用yyyy/MM/dd
                 System.out.println(selectedDate);
 
                 TextView d1 = findViewById(R.id.d1);
@@ -136,11 +161,67 @@ public class MainActivity extends AppCompatActivity {
                     myAdapter.setDataList(dataList);    //表示したいリストをセット
                     listView.setAdapter(myAdapter);     //リストビューに表示
 
-                    s1.setText(R.string.s1);//合計金額に0円表示
+                    s1.setText(R.string.s1);//合計金額に空白表示
                 }
+
+                //リスト項目をクリック時に呼び出される
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    //リスト項目クリック時の処理
+
+                    /* 1.AdapterView<?> parent
+                     * ->タップされたListView全体
+
+                     * 2.View view
+                     * ->タップされた１行分の画面部品
+
+                     * 3.int position
+                     * ->タップされた行番号　
+                     * 0から始まる
+
+                     * 4.long id
+                     * ->DBのデータをもとにListViewを生成した際の主キーの値
+                     * DBを使わない場合は上のpositionと同じ値*/
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        // ここに処理を記述します。
+                        //今回は、id情報を持って画面遷移 インテントにセット
+                        Intent intent = new Intent(MainActivity.this, EditActivity.class);
+                        int intId = (int)id;
+                        intent.putExtra("id", intId);
+                        System.out.println(String.valueOf(intId));
+                        startActivity(intent);
+                    }
+
+                });
+
+                Button addButton = findViewById(R.id.addButton);
+                //日付をセレクトしている状態で追加ボタン押下時
+                addButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        day = selectedDay;
+                        System.out.println(day);
+                        //追加ページに画面遷移
+                        Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                        System.out.println("追加したい日" + day);
+                        intent.putExtra("day", day);
+                        startActivity(intent);
+                    }
+                });
             }
 
         });
+    }
+
+    public void onResume() {
+        super.onResume();
+        System.out.println("MainPage onResume");
+    }
+
+    public void onResume(int date) {
+        super.onResume();
+        System.out.println("MainPage onResume : date");
     }
 
 }
