@@ -11,17 +11,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 public class EditActivity extends AppCompatActivity {
 
     private TestOpenHelper helper;
     private SQLiteDatabase db;
+    private int dispDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +91,7 @@ public class EditActivity extends AppCompatActivity {
         String dispCategory = cursor.getString(2);
         int dispMoney = cursor.getInt(3);
         String dispPayment = cursor.getString(4);
-        int dispDay = cursor.getInt(5);
+        dispDay = cursor.getInt(5);
 
         cursor.close();
 
@@ -147,6 +144,11 @@ public class EditActivity extends AppCompatActivity {
                 values.put("month", Month);
                 db.update("expenditure", values, "id = " + getId, null);
 
+                //Mainに日付を戻す
+                Intent intent = new Intent();
+                intent.putExtra("Day",NumDay);
+                setResult(RESULT_OK, intent);
+
                 //ページを閉じる
                 finish();
             }
@@ -166,6 +168,10 @@ public class EditActivity extends AppCompatActivity {
                 //ダイアログの表示
                 dialogFragment.show(getSupportFragmentManager(),"SampleDialogFragment");
 
+                //Mainに日付を戻す
+                Intent intent = new Intent();
+                intent.putExtra("Day",dispDay);
+                setResult(RESULT_OK, intent);
             }
 
         });
@@ -176,6 +182,10 @@ public class EditActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Mainに日付を戻す
+                Intent intent = new Intent();
+                intent.putExtra("Day",dispDay);
+                setResult(RESULT_OK, intent);
                 //ページを閉じる
                 finish();
             }
@@ -189,6 +199,10 @@ public class EditActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         db.delete("expenditure", "id =" + number, null);
 
+        //Mainに日付を戻す
+        Intent intent = new Intent();
+        intent.putExtra("Day",dispDay);
+        setResult(RESULT_OK, intent);
         //ページを閉じる
         finish();
     }

@@ -1,24 +1,17 @@
 package com.example.budgetas;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.app.DatePickerDialog.OnDateSetListener;
-import androidx.fragment.app.DialogFragment;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import java.util.Locale;
 
 public class AddActivity extends AppCompatActivity {
     private TestOpenHelper helper;
@@ -101,8 +94,15 @@ public class AddActivity extends AppCompatActivity {
                 values.put("month", Month);
                 db.insert("expenditure", null, values);
 
-                //ページを閉じる
+                //Mainに日付を戻す
+                Intent intent = new Intent();
+                intent.putExtra("Day",NumDay);
+                setResult(RESULT_OK, intent);
+
+                // このアクティビティを終了する
                 finish();
+                //確認用
+                System.out.println("ライフサイクル onCreate()");
             }
         });
 
@@ -116,4 +116,43 @@ public class AddActivity extends AppCompatActivity {
         });
 
     }
+
+    // 以下は、ライフサイクルのテスト用
+
+    @Override
+    protected void onStart() {
+        System.out.println("ライフサイクル onStart()");
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        System.out.println("ライフサイクル onRestart()");
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        System.out.println("ライフサイクル onResume()");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        System.out.println("ライフサイクル onPause()");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        System.out.println("ライフサイクル onStop()");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        System.out.println("ライフサイクル onDestroy()");
+        super.onDestroy();
+    }
 }
+

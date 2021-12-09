@@ -3,7 +3,6 @@ package com.example.budgetas;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -36,7 +35,6 @@ public class SampleDialogFragment extends DialogFragment {
         //Negative ボタンに表示内容と
         builder.setNegativeButton(R.string.dialog_button_cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
                     }
                 });
 
