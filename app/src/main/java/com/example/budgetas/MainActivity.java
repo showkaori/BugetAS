@@ -158,8 +158,8 @@ public class MainActivity extends AppCompatActivity{
                 // 追加画面に渡す値
                 intent.putExtra("M",month1);
                 // サブ画面を表示する
-                startActivityForResult(intent,FORM_REQUESTCODE);
-                //startActivity(intent);
+                //startActivityForResult(intent,FORM_REQUESTCODE);
+                startActivity(intent);
 
             }
         });
