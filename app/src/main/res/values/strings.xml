@@ -28,6 +28,26 @@
     <string name="dialog_title">データの削除</string>
     <string name="dialog_button_ok">削除</string>
     <string name="dialog_button_cancel">キャンセル</string>
+    <string name="all">　</string>
+    <string name="detaButton">データ</string>
+    <string name="prev"> ≪ </string>
+    <string name="next"> ≫ </string>
+    <string name="total">総出費：　</string>
+    <string name="c1">食費　：　</string>
+    <string name="c2">外食　：　</string>
+    <string name="c3">日用品　：　</string>
+    <string name="c4">嗜好品　：　</string>
+    <string name="c5">服・美容　：　</string>
+    <string name="c6">交通費　：　</string>
+    <string name="c7">教養　：　</string>
+    <string name="c8">家族　：　</string>
+    <string name="c9">医療　：　</string>
+    <string name="c10">通信費　：　</string>
+    <string name="c11">光熱費　：　</string>
+    <string name="c13">住まい　：　</string>
+    <string name="c14">税金　：　</string>
+    <string name="c15">保険　：　</string>
+    <string name="c16">その他　：　</string>
 
     <string-array name="categorySpinner">
         <item>食費</item>

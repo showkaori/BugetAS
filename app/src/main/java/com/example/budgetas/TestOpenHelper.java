@@ -2,8 +2,10 @@ package com.example.budgetas;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TextView;
 
 public class TestOpenHelper extends SQLiteOpenHelper {
 
@@ -38,6 +40,10 @@ public class TestOpenHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
+    /*テーブル作成SQL文
+    private static final String SQL_CREATE_ENTRIES2 =
+            "CREATE TABLE CATEGORY (_ID INTEGER PRIMARY KEY, KIND TEXT)"; */
+
     //コンストラクタ―
     TestOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -51,6 +57,8 @@ public class TestOpenHelper extends SQLiteOpenHelper {
         db.execSQL(
                 SQL_CREATE_ENTRIES
         );
+
+
     }
 
     @Override
@@ -82,3 +90,5 @@ public class TestOpenHelper extends SQLiteOpenHelper {
     }
 
 }
+
+

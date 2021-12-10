@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity{
     private SQLiteDatabase db;
     ArrayList<Expenditure> dataList = new ArrayList<>();
     private String day;
+    private String month1;
     // 画面間でやりとりする任意のコード
     private final int FORM_REQUESTCODE = 1000;
 
@@ -54,14 +55,15 @@ public class MainActivity extends AppCompatActivity{
             d = String.valueOf(today);
         }
 
+        //現在の日にち表示
         TextView d1 = findViewById(R.id.d1);
-        d1.setText(today + "日"); //クリックしている日にちの表示
+        d1.setText(today + "日");
         int Disp = Integer.parseInt(new StringBuilder().append(year).append(mon).append(d).toString()); //yyyyMMddの形に
 
         //他の日のデータに追加ではなくその日のデータのみ表示したいのでいったんクリア
         dataList.clear ();
 
-        //その日にデータがある場合はリストビューに表示
+        //本日にデータがある場合はリストビューに表示
         if(helper == null){
             helper = new TestOpenHelper(getApplicationContext());
         }
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity{
         ListView listView = (ListView)findViewById(R.id.mainList); //LIstViewインスタンス化
         TextView s1 = (TextView) findViewById(R.id.s1);
         int sum = 0;
+
         NumberFormat nfCur = NumberFormat.getCurrencyInstance();  //通貨形式
         if(cursor.getCount() != 0 ){
             for(int i = 0; i < cursor.getCount(); i++){
@@ -94,7 +97,7 @@ public class MainActivity extends AppCompatActivity{
                 int money = cursor.getInt(4);
                 String payment = cursor.getString(5);
                 int day = cursor.getInt(6);
-                String month1 = cursor.getString(7);
+                month1 = cursor.getString(7);
                 Expenditure exp = new Expenditure(id, detail, memo, category, money, payment, day,month1);
                 dataList.add(exp);
 
@@ -137,15 +140,30 @@ public class MainActivity extends AppCompatActivity{
                 intent.putExtra("day",day);
                 // サブ画面を表示する
                 startActivityForResult(intent,FORM_REQUESTCODE);
-                /*
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                System.out.println("追加したい日" + day);
-                intent.putExtra("day", day);
-                startActivity(intent);
-
-                 */
             }
         });
+
+        Button detaButton = findViewById(R.id.detaButton);
+        //データボタンクリック時
+        detaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(month1.length() != 6){
+                    month1 = new StringBuilder().append(year).append(mon).toString();
+                }
+                //yyyyMM(String)を持ってデータページに画面遷移
+                System.out.println("データページに送る" + month1);
+                // インテントの準備
+                Intent intent = new Intent(MainActivity.this,DataActivity.class);
+                // 追加画面に渡す値
+                intent.putExtra("M",month1);
+                // サブ画面を表示する
+                startActivityForResult(intent,FORM_REQUESTCODE);
+                //startActivity(intent);
+
+            }
+        });
+
 
         //リスト項目をクリック時に呼び出される
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -174,6 +192,7 @@ public class MainActivity extends AppCompatActivity{
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+
                 int mYear = year;   //年の取得
                 int mMonth = month; //（月ー1）の取得
                 String mon = "";
@@ -234,7 +253,7 @@ public class MainActivity extends AppCompatActivity{
                         int money = cursor.getInt(4);
                         String payment = cursor.getString(5);
                         int day = cursor.getInt(6);
-                        String month1 = cursor.getString(7);
+                        month1 = cursor.getString(7);
                         Expenditure exp = new Expenditure(id, detail, memo, category, money, payment, day,month1);
                         dataList.add(exp);
 
@@ -307,9 +326,11 @@ public class MainActivity extends AppCompatActivity{
                         startActivityForResult(intent,FORM_REQUESTCODE);
                     }
                 });
+
             }
 
         });
+
     }
 
     public void onResume() {
@@ -371,7 +392,7 @@ public class MainActivity extends AppCompatActivity{
                         int money = cursor.getInt(4);
                         String payment = cursor.getString(5);
                         int day = cursor.getInt(6);
-                        String month1 = cursor.getString(7);
+                        month1 = cursor.getString(7);
                         Expenditure exp = new Expenditure(id, detail, memo, category, money, payment, day, month1);
                         dataList.add(exp);
 
