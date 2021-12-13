@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 
+//削除確認ダイアログ
 public class SampleDialogFragment extends DialogFragment {
 
     private int number;

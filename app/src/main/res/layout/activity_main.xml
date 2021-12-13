@@ -23,7 +23,6 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:layout_gravity="right"
             android:background="@layout/button_custom"
             android:text="@string/detaButton" />
         <Button
@@ -31,7 +30,6 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:layout_gravity="right"
             android:background="@layout/button_custom"
             android:text="@string/addButton" />
     </LinearLayout>

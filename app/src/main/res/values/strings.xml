@@ -30,8 +30,8 @@
     <string name="dialog_button_cancel">キャンセル</string>
     <string name="all">　</string>
     <string name="detaButton">データ</string>
-    <string name="prev"> ≪ </string>
-    <string name="next"> ≫ </string>
+    <string name="prev"> 前 ≪ </string>
+    <string name="next"> ≫ 次 </string>
     <string name="total">総出費：　</string>
     <string name="c1">食費　：　</string>
     <string name="c2">外食　：　</string>

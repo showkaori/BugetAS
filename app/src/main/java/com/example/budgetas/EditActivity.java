@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+//編集ページ
 public class EditActivity extends AppCompatActivity {
 
     private TestOpenHelper helper;

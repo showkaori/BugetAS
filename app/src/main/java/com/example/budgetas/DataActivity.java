@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class DataActivity extends AppCompatActivity {
 

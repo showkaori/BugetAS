@@ -24,7 +24,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="@string/t1" />
 
@@ -44,12 +44,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="@string/t2" />
         <Spinner
             android:id="@+id/category"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:entries="@array/categorySpinner"
@@ -68,12 +68,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="@string/t3" />
         <EditText
             android:id="@+id/detail"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
             android:layout_width="150dp"
             android:layout_height="48dp"
             android:inputType="text"
@@ -89,7 +89,7 @@
         android:orientation="horizontal"
         tools:ignore="ExtraText">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="@string/t4" />
 
@@ -97,6 +97,7 @@
             android:id="@+id/memo"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:maxLength="200"
@@ -112,12 +113,12 @@
         android:orientation="horizontal"
         tools:ignore="ExtraText">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="@string/t5" />
         <EditText
             android:id="@+id/money"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
             android:layout_width="150dp"
             android:layout_height="48dp"
             android:inputType="number"
@@ -132,12 +133,12 @@
         android:orientation="horizontal"
         tools:ignore="ExtraText">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="@string/t6" />
         <Spinner
             android:id="@+id/payment"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:entries="@array/paymentSpinner"

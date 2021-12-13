@@ -3,9 +3,9 @@ package com.example.budgetas;
 import java.text.NumberFormat;
 
 public class Kind {
-    private int id;
-    private String category;
-    private int sum;
+    private int id;         //管理番号
+    private String category;    //カテゴリー
+    private int sum;        //その月のカテゴリ別総出費
 
     public Kind(int id, String category, int sum){
         this.id = id;
@@ -16,6 +16,7 @@ public class Kind {
     public int getId(){
         return this.id;
     }
+    //シングルコーテーションの除去
     public String getCategory(){
         String result = this.category.replace("'", "");
         return result;

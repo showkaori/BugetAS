@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
+//データページカテゴリー別総出費リスト表示用
 public class Adapter extends BaseAdapter {
     Context context;
     LayoutInflater layoutInflater = null;

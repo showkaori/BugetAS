@@ -35,6 +35,7 @@ public class Expenditure {
     public int getDay(){ return this.Day; }
     public String getMonth(){ return this.Month; }
 
+    //￥と桁区切り表示
     public String getStrMoney(){
         NumberFormat nfCur = NumberFormat.getCurrencyInstance();  //通貨形式
         String strMoney = nfCur.format(this.Money);

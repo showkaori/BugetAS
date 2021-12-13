@@ -338,7 +338,7 @@ public class MainActivity extends AppCompatActivity{
         System.out.println("MainPage onResume");
     }
 
-    //追加画面から日付を受け取りListViewを更新する
+    //他のページから値を持って戻った時
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

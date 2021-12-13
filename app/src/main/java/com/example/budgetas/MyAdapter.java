@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+//メインページに表示する出費リスト
 public class MyAdapter extends BaseAdapter {
     Context context;
     LayoutInflater layoutInflater = null;
